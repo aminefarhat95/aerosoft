@@ -29,6 +29,7 @@ import net.atos.maroc.application.entities.Rapport;
 import net.atos.maroc.application.entities.SMMM;
 import net.atos.maroc.application.entities.Utilisateur;
 
+
 @SpringBootApplication
 public class PfeSidApplication  implements CommandLineRunner{
 	@Autowired
