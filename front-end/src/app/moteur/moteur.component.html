@@ -1,0 +1,71 @@
+<div class="container spacer" *ngIf="posteUser=='administrateur'">
+  <div class="disconnect">
+    <label>USER:{{login}}</label>
+    <button  (click)="disconect()" class="btn">déconnexion</button>
+  </div>
+
+  <button routerLink="/dashboard" class="btn btn-primary" >Accueil</button>
+  <button routerLink="/profiles" class="btn btn-primary" >Gestion Profiles</button>
+  <button routerLink="/membres" class="btn btn-primary">Gestion Membres</button>
+  <button routerLink="/moteurs" class="btn btn-primary">Gestion Moteurs</button>
+  <button routerLink="/shops" class="btn btn-primary">Gestion SM/MM</button>
+  <button routerLink="/clients" class="btn btn-primary">Gestion Clients</button>
+
+</div>
+<div class="container spacer">
+  <div class="panel panel-primary">
+    <div class="panel panel-heading"> Gestion des Moteurs</div>
+    <div class="panel-body">
+      <div class="form-group">
+        <label>Recherche:</label>
+        <input type="text" [(ngModel)]="motCle"/>
+        <button class="btn btn-primary">Chercher</button>
+        <div class="excel">
+          <img src="./assets/Excell.png" (click)="export()"/>
+          <img src="./assets/icon.png" />
+        </div>
+      </div>
+      <div>
+
+        <table class="table table-striped">
+          <form #f="ngForm" (ngSubmit)="onAddMoteur(f.value)">
+
+            <tr>
+              <td><input class="form-control" type="text" ngModel name="esn" placeholder="Esn" required/></td>
+              <td><input class="form-control" type="text" ngModel name="type_Moteur" placeholder="Type de Moteur" required/></td>
+              <td> <select name="client" [(ngModel)]="selected">
+                <option *ngFor="let p of clients" [ngValue]="p"> {{p.nom}} </option>
+              </select></td>
+              <td><button  type="submit" class="btn btn-primary">Ajouter</button></td>
+            </tr>
+          </form>
+        </table>
+      </div>
+
+      <table class="table table-striped">
+        <tr>
+          <th>Esn</th><th>Type de Moteur</th><th>Client</th><th></th><th></th>
+        </tr>
+        <tr *ngFor="let c of pageMembres?.content">
+          <td>{{c.esn}}</td>
+          <td>{{c.type_Moteur}}</td>
+          <td>{{c.client.nom}} </td>
+          <td>
+            <a (click)="onEditMoteur(c.esn)"  class="clickable btn btn-info"> Edit </a>
+          </td>
+          <td>
+            <a  (click)="onDeleteMoteur(c)" class="clickable btn btn-danger"> Delete </a>
+          </td>
+        </tr>
+      </table>
+
+      <div class="container">
+        <ul class="nav nav-pills">
+          <li [ngClass]="{'active':i==currentPage}" *ngFor="let p of pages ; let i =index"><a class="clickable" (click)="gotoPage(i)">{{i}}</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+

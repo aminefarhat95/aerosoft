@@ -1,0 +1,146 @@
+<div class="container spacer" *ngIf="posteUser=='administrateur'">
+  <div class="disconnect">
+    <label>USER:{{login}}</label>
+    <button  (click)="disconect()" class="btn">déconnexion</button>
+  </div>
+  <button routerLink="/dashboard" class="btn btn-primary" >Accueil</button>
+  <button routerLink="/profiles" class="btn btn-primary" >Gestion Profiles</button>
+  <button routerLink="/membres" class="btn btn-primary">Gestion Membres</button>
+  <button routerLink="/moteurs" class="btn btn-primary">Gestion Moteurs</button>
+  <button routerLink="/shops" class="btn btn-primary">Gestion SM/MM</button>
+  <button routerLink="/clients" class="btn btn-primary">Gestion Clients</button>
+
+</div>
+<div class="container spacer" *ngIf="posteUser=='ingenieur'">
+  <div class="disconnect">
+    <label>USER:{{login}}</label>
+    <button  (click)="disconect()" class="btn">déconnexion</button>
+  </div>
+  <button routerLink="/dashboard" class="btn btn-primary" >Accueil</button>
+  <button routerLink="/fiches" class="btn btn-primary" >Gestion Fiches Moteurs</button>
+  <button routerLink="/propositions" class="btn btn-primary">Gestion Propositions</button>
+
+</div>
+
+<div class="container spacer" *ngIf="posteUser=='vst'">
+  <div class="disconnect">
+    <label>USER:{{login}}</label>
+    <button  (click)="disconect()" class="btn">déconnexion</button>
+  </div>
+  <button routerLink="/dashboard" class="btn btn-primary" >Accueil</button>
+  <button routerLink="/rapports" class="btn btn-primary" >Gestion Rapports</button>
+  <button routerLink="/detailPropositions" class="btn btn-primary">Detail Propositions</button>
+
+</div>
+
+<div class="container spacer" *ngIf="posteUser=='chargerAffaire'">
+  <div class="disconnect">
+    <label>USER:{{login}}</label>
+    <button  (click)="disconect()" class="btn">déconnexion</button>
+  </div>
+  <button routerLink="/dashboard" class="btn btn-primary" >Accueil</button>
+  <button routerLink="/traiterProposition" class="btn btn-primary" >Traiter Propositions</button>
+
+</div>
+
+<div class="container spacer" *ngIf="mode==1">
+  <div class="panel panel-primary">
+    <div class="panel panel-heading"> Accueil</div>
+    <div class="panel-body">
+      <div>
+        <button (click)="mode1()" class="btn btn-info" >Rapports Par Membre VST</button>
+        <button (click)="mode2()" class="btn btn-info" >Rapports Par Moteur</button>
+        <button (click)="mode3()" class="btn btn-info" >Propositions Approuvés</button>
+      </div>
+      <div class="form-group spacer">
+        <label>Membre:</label>
+        <select name="membre" [(ngModel)]="selected" (change)="onChange($event)">
+          <option *ngFor="let p of membres" [ngValue]="p">{{p.login}} </option>
+        </select>
+      </div>
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div style="display: block;">
+            <canvas baseChart width="400" height="300"
+                    [datasets]="lineChartData"
+                    [labels]="lineChartLabels"
+                    [options]="lineChartOptions"
+                    [colors]="lineChartColors"
+                    [legend]="lineChartLegend"
+                    [chartType]="lineChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container spacer" *ngIf="mode==2">
+  <div class="panel panel-primary">
+    <div class="panel panel-heading"> Accueil</div>
+    <div class="panel-body">
+      <div>
+        <button (click)="mode1()" class="btn btn-info" >Rapports Par Membre VST</button>
+        <button (click)="mode2()" class="btn btn-info" >Rapports Par Moteur</button>
+        <button (click)="mode3()" class="btn btn-info" >Propositions Approuvés</button>
+      </div>
+      <div class="form-group spacer">
+        <label>Moteur:</label>
+        <select name="moteur" [(ngModel)]="selected1" (change)="onChange1($event)">
+          <option *ngFor="let p of moteurs" [ngValue]="p">esn:{{p.esn}} </option>
+        </select>
+      </div>
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div style="display: block;">
+            <canvas baseChart width="400" height="300"
+                    [datasets]="lineChartData"
+                    [labels]="lineChartLabels"
+                    [options]="lineChartOptions"
+                    [colors]="lineChartColors"
+                    [legend]="lineChartLegend"
+                    [chartType]="lineChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container spacer" *ngIf="mode==3">
+  <div class="panel panel-primary">
+    <div class="panel panel-heading"> Accueil</div>
+    <div class="panel-body">
+      <div>
+        <button (click)="mode1()" class="btn btn-info" >Rapports Par Membre VST</button>
+        <button (click)="mode2()" class="btn btn-info" >Rapports Par Moteur</button>
+        <button (click)="mode3()" class="btn btn-info" >Propositions Approuvés</button>
+      </div>
+      <div class="form-group spacer">
+        <label>Ingenieur:</label>
+        <select name="ing" [(ngModel)]="selected2" (change)="onChange2($event)">
+          <option *ngFor="let p of ing" [ngValue]="p">{{p.login}} </option>
+        </select>
+      </div>
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div style="display: block;">
+            <canvas baseChart width="400" height="300"
+                    [datasets]="lineChartData"
+                    [labels]="lineChartLabels"
+                    [options]="lineChartOptions"
+                    [colors]="lineChartColors"
+                    [legend]="lineChartLegend"
+                    [chartType]="lineChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

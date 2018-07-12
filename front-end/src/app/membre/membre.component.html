@@ -1,0 +1,77 @@
+<div class="container spacer" *ngIf="posteUser=='administrateur'">
+  <div class="disconnect">
+    <label>USER:{{login}}</label>
+    <button  (click)="disconect()" class="btn">déconnexion</button>
+  </div>
+  <button routerLink="/dashboard" class="btn btn-primary" >Accueil</button>
+
+  <button routerLink="/profiles" class="btn btn-primary" >Gestion Profiles</button>
+  <button routerLink="/membres" class="btn btn-primary">Gestion Membres</button>
+  <button routerLink="/moteurs" class="btn btn-primary">Gestion Moteurs</button>
+  <button routerLink="/shops" class="btn btn-primary">Gestion SM/MM</button>
+  <button routerLink="/clients" class="btn btn-primary">Gestion Clients</button>
+
+</div>
+
+<div class="container spacer">
+  <div class="panel panel-primary">
+    <div class="panel panel-heading"> Gestion des Membres</div>
+    <div class="panel-body">
+      <div class="form-group">
+        <label>Recherche:</label>
+        <input type="text" [(ngModel)]="motCle"/>
+        <button class="btn btn-primary">Chercher</button>
+        <div class="excel">
+          <img src="./assets/Excell.png" (click)="export()"/>
+          <img src="./assets/icon.png" />
+        </div>
+      </div>
+<div>
+
+      <table class="table table-striped">
+        <form #f="ngForm" (ngSubmit)="onAddMembre(f.value)">
+
+          <tr>
+            <td><input class="form-control" type="text" ngModel name="matricule" placeholder="matricule" required/></td>
+            <td><input class="form-control" type="text" ngModel name="login" placeholder="login" required/></td>
+            <td><input class="form-control" type="password" ngModel name="password" placeholder="password" required/></td>
+            <td><input class="form-control" type="text" ngModel name="fonction" placeholder="fonction" required/></td>
+            <td><input class="form-control" type="text" ngModel name="email" placeholder="email" required/></td>
+            <td> <select name="profile" [(ngModel)]="selected">
+              <option *ngFor="let p of profiles" [ngValue]="p"> {{p.poste}} </option>
+            </select></td>
+            <td><button  type="submit" class="btn btn-primary">Ajouter</button></td>
+          </tr>
+        </form>
+      </table>
+</div>
+
+      <table class="table table-striped">
+        <tr>
+          <th>Matricule</th><th>Login</th><th>Fonction</th> <th>Email</th><th>Profile</th><th></th><th></th>
+        </tr>
+        <tr *ngFor="let c of pageMembres?.content">
+          <td>{{c.matricule}}</td>
+          <td>{{c.login}}</td>
+          <td>{{c.fonction}} </td>
+          <td>{{c.email}}</td>
+          <td>{{c.profile.poste}}</td>
+          <td>
+            <a (click)="onEditMembre(c.matricule)"  class="clickable btn btn-info"> Edit </a>
+          </td>
+          <td>
+            <a  (click)="onDeleteMembre(c)" class="clickable btn btn-danger"> Delete </a>
+          </td>
+        </tr>
+      </table>
+
+      <div class="container">
+      <ul class="nav nav-pills">
+      <li [ngClass]="{'active':i==currentPage}" *ngFor="let p of pages ; let i =index"><a class="clickable" (click)="gotoPage(i)">{{i}}</a></li>
+      </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,52 @@
+
+<div class="container spacer" *ngIf="posteUser=='vst'">
+  <div class="disconnect">
+    <label>USER:{{login}}</label>
+    <button  (click)="disconect()" class="btn">déconnexion</button>
+  </div>
+  <button routerLink="/dashboard" class="btn btn-primary" >Accueil</button>
+
+  <button routerLink="/rapports" class="btn btn-primary" >Gestion Rapports</button>
+  <button routerLink="/traiterProposition" class="btn btn-primary">Detail Propositions</button>
+
+</div>
+
+
+<div class="spacer">
+  <div class="panel panel-primary">
+    <div class="panel panel-heading"> Gestion des Propositions</div>
+    <div class="panel-body">
+      <div class="form-group">
+        <label>Recherche:</label>
+        <input type="text" [(ngModel)]="motCle"/>
+        <button class="btn btn-primary">Chercher</button>
+      </div>
+
+      <table class="table table-striped" border="1">
+        <tr>
+          <th>Proposition</th><th>PN_Rapport</th><th>User_VST</th><th>User_Igenieur</th><th>ProposedTasks</th> <th>Statut_Proposition</th><th>Cout</th><th>Date_Proposition</th><th>Date_Init_Csc</th><th>Date_Resp_Csc</th><th>Date_Approbation</th><th>Remarques</th>
+        </tr>
+        <tr *ngFor="let c of pageRapport?.content">
+          <td>{{c.proposition.id_proposition}}</td>
+          <td>{{c.id_Rapport}}</td>
+          <td>{{c.utilisateur.login}} </td>
+          <td>{{c.ficheMoteur.utilisateur.login}}</td>
+          <td>{{c.proposition.proposition_tasks}}</td>
+          <td>{{c.proposition.statut}}</td>
+          <td>{{c.proposition.cout_proposition}}</td>
+          <td>{{c.proposition.date_proposition}}</td>
+          <td>{{c.proposition.csc_init_date}}</td>
+          <td>{{c.proposition.csc_resp_date}}</td>
+          <td>{{c.proposition.date_approbation}}</td>
+          <td>{{c.proposition.remarques}}</td>
+        </tr>
+      </table>
+
+      <div class="container">
+        <ul class="nav nav-pills">
+          <li [ngClass]="{'active':i==currentPage}" *ngFor="let p of pages ; let i =index"><a class="clickable" (click)="gotoPage(i)">{{i}}</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

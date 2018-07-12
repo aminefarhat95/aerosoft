@@ -1,0 +1,43 @@
+<div class="container spacer" *ngIf="posteUser=='administrateur'">
+  <div class="disconnect">
+    <label>USER:{{login}}</label>
+    <button  (click)="disconect()" class="btn">déconnexion</button>
+  </div>
+  <button routerLink="/dashboard" class="btn btn-primary" >Accueil</button>
+
+  <button routerLink="/profiles" class="btn btn-primary" >Gestion Profiles</button>
+  <button routerLink="/membres" class="btn btn-primary">Gestion Membres</button>
+  <button routerLink="/moteurs" class="btn btn-primary">Gestion Moteurs</button>
+  <button routerLink="/shops" class="btn btn-primary">Gestion SM/MM</button>
+  <button routerLink="/clients" class="btn btn-primary">Gestion Clients</button>
+
+</div>
+<div class="container spacer">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Modification d'un Shop</div>
+    <div class="panel-body">
+      <div>
+        <div class="form-group">
+          <label class="control-label"> ID:</label>
+          <input class="form-control" type="number"  [(ngModel)]="shop.id" [disabled]="true"/>
+        </div>
+      </div>
+
+      <div>
+        <div class="form-group">
+          <label class="control-label"> Designation:</label>
+          <input class="form-control" type="text"  [(ngModel)]="shop.designation"/>
+        </div>
+      </div>
+      <div>
+        <div class="form-group">
+          <label class="control-label"> Constructeur:</label>
+          <input class="form-control" type="text"  [(ngModel)]="shop.csc"/>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary" (click)="updateShop()">Save</button>
+
+  </div>
+</div>
+

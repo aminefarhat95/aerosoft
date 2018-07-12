@@ -1,0 +1,67 @@
+<div class="container spacer" *ngIf="posteUser=='ingenieur'">
+  <div class="disconnect">
+    <label>USER:{{login}}</label>
+    <button  (click)="disconect()" class="btn">déconnexion</button>
+  </div>
+  <button routerLink="/dashboard" class="btn btn-primary" >Accueil</button>
+
+  <button routerLink="/fiches" class="btn btn-primary" >Gestion Fiches Moteurs</button>
+  <button routerLink="/propositions" class="btn btn-primary">Gestion Propositions</button>
+
+</div>
+<form #f="ngForm" (ngSubmit)="onAddProposition(f.value)">
+<div class="container spacer">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Ajouter une Proposition</div>
+    <div class="panel-body">
+      <div>
+        <div class="form-group">
+          <label class="control-label"> IdProposition:</label>
+          <input name="id_proposition" class="form-control" type="number"  [(ngModel)]="proposition.id_proposition"/>
+        </div>
+      </div>
+
+      <div>
+        <div class="form-group">
+          <label class="control-label"> IdRapport:</label>
+          <input name="id_Rapport" class="form-control" type="text" [(ngModel)]="rapport.id_Rapport" />
+        </div>
+      </div>
+      <div>
+        <div class="form-group">
+          <label class="control-label"> ProposedTasks:</label>
+          <input  name="proposition_tasks" class="form-control" type="text" [(ngModel)]="proposition.proposition_tasks"/>
+        </div>
+      </div>
+      <div>
+        <div class="form-group">
+          <label class="control-label"> Cout:</label>
+          <input  name="cout_proposition" class="form-control" type="text" [(ngModel)]="proposition.cout_proposition"/>
+        </div>
+      </div>
+      <div>
+        <div class="form-group">
+          <label class="control-label"> Csc Init Date:</label>
+          <input name="csc_init_date" class="form-control" type="date" [(ngModel)]="proposition.csc_init_date"/>
+        </div>
+      </div>
+      <div>
+        <div class="form-group">
+          <label class="control-label"> Csc Response Date:</label>
+          <input name="csc_resp_date" class="form-control" type="date" [(ngModel)]="proposition.csc_resp_date"/>
+        </div>
+      </div>
+      <div>
+        <div class="form-group">
+          <label class="control-label"> Accord:</label>
+          <input type="radio" value="true" name="accord" [ngModel]="proposition.accord"/>Avec
+          <input  type="radio" value="false" name="accord" [ngModel]="proposition.accord"/>Sans
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+
+  </div>
+</div>
+
+</form>

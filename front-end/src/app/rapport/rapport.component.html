@@ -1,0 +1,94 @@
+
+<div class="container spacer" *ngIf="posteUser=='vst'">
+  <div class="disconnect">
+    <label>USER:{{login}}</label>
+    <button  (click)="disconect()" class="btn">déconnexion</button>
+  </div>
+  <button routerLink="/dashboard" class="btn btn-primary" >Accueil</button>
+
+  <button routerLink="/rapports" class="btn btn-primary" >Gestion Rapports</button>
+  <button routerLink="/detailPropositions" class="btn btn-primary">Detail Propositions</button>
+
+</div>
+
+<div class="spacer">
+  <div class="panel panel-primary">
+    <div class="panel panel-heading"> Gestion des Rapports</div>
+    <div class="panel-body">
+      <div class="form-group">
+        <label>Recherche:</label>
+        <input type="text" [(ngModel)]="motCle"/>
+        <button class="btn btn-primary">Chercher</button>
+        <div class="excel">
+          <img src="./assets/Excell.png" (click)="export()"/>
+          <img src="./assets/icon.png" />
+        </div>
+      </div>
+      <div>
+
+        <table class="table table-striped">
+          <form #f="ngForm" (ngSubmit)="onAddRapport(f.value)">
+
+            <tr>
+              <td><input class="form-control" type="text" ngModel name="designation_rapport" placeholder="Designation" required/></td>
+              <td><input class="form-control" type="text" ngModel name="pn" placeholder="PN" required/></td>
+              <td> <select name="smmm" [(ngModel)]="selected2">
+                <option *ngFor="let p of shops" [ngValue]="p">IdShop: {{p.id}} </option>
+              </select></td>
+              <td> <select name="ficheMoteur" [(ngModel)]="selected">
+                <option *ngFor="let p of fiches" [ngValue]="p">NumFiche: {{p.numFiche}} </option>
+              </select></td>
+              <td><input class="form-control" type="text" ngModel name="sub_task" placeholder="SubTask" required/></td>
+              <td><input class="form-control" type="text" ngModel name="area" placeholder="area" required/></td>
+              <td><input class="form-control" type="text" ngModel name="finding" placeholder="finding" required/></td>
+              <td><input class="form-control" type="text" ngModel name="family" placeholder="family" required/></td>
+              <td><input class="form-control" type="text" ngModel name="qty" placeholder="quantite" required/></td>
+              <td><input class="form-control" type="text" ngModel name="manuel" placeholder="manuel" required/></td>
+              <td><input class="form-control" type="date" ngModel name="date_previsionnelle" placeholder="date previsionnelle" required/></td>
+
+              <td><button  type="submit" class="btn btn-primary">Ajouter</button></td>
+            </tr>
+          </form>
+        </table>
+      </div>
+
+
+
+      <table class="table table-striped" border="1">
+        <tr>
+          <th>Designation</th><th>PN</th><th>User</th><th>SM/MM</th> <th>Moteur</th><th>SubTask</th><th>Area</th><th>Finding</th><th>Family</th><th>Quantite</th><th>Statut</th><th>Manuel</th>
+          <th>Date Creation</th><th>Date Previsionnelle</th><th></th><th></th>
+        </tr>
+        <tr *ngFor="let c of pageRapport?.content">
+          <td>{{c.designation_rapport}}</td>
+          <td>{{c.pn}}</td>
+          <td>{{c.utilisateur.login}}</td>
+          <td>{{c.smmm.id}} </td>
+          <td>{{c.ficheMoteur.moteur.esn}}</td>
+          <td>{{c.sub_task}}</td>
+          <td>{{c.area}}</td>
+          <td>{{c.finding}}</td>
+          <td>{{c.family}}</td>
+          <td>{{c.qty}}</td>
+          <td>{{c.statut}}</td>
+          <td>{{c.manuel}}</td>
+          <td>{{c.date_creation | date:'yyyy-MM-dd'}}</td>
+          <td>{{c.date_previsionnelle | date:'yyyy-MM-dd'}}</td>
+          <td>
+            <a (click)="onEditRapport(c.id_Rapport)"  class="clickable btn btn-info"> Edit </a>
+          </td>
+          <td>
+            <a  (click)="onDeleteRapport(c)" class="clickable btn btn-danger"> Delete </a>
+          </td>
+        </tr>
+      </table>
+
+      <div class="container">
+        <ul class="nav nav-pills">
+          <li [ngClass]="{'active':i==currentPage}" *ngFor="let p of pages ; let i =index"><a class="clickable" (click)="gotoPage(i)">{{i}}</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,65 @@
+
+<div class="container spacer" *ngIf="posteUser=='ingenieur'">
+  <div class="disconnect">
+    <label>USER:{{login}}</label>
+    <button  (click)="disconect()" class="btn">déconnexion</button>
+  </div>
+  <button routerLink="/dashboard" class="btn btn-primary" >Accueil</button>
+
+  <button routerLink="/fiches" class="btn btn-primary" >Gestion Fiches Moteurs</button>
+  <button routerLink="/propositions" class="btn btn-primary">Gestion Propositions</button>
+
+</div>
+<div class="container spacer">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Modification d'une Fiche de Moteur</div>
+    <div class="panel-body">
+      <div>
+        <div class="form-group">
+          <label class="control-label"> NumFiche:</label>
+          <input class="form-control" type="number"  [(ngModel)]="fiche.numFiche" [disabled]="true"/>
+        </div>
+      </div>
+
+      <div>
+        <div class="form-group">
+          <label class="control-label"> User:</label>
+          <input class="form-control" type="text" [(ngModel)]="fiche.utilisateur.login" [disabled]="true"/>
+        </div>
+      </div>
+      <div>
+        <div class="form-group">
+          <label class="control-label"> Moteur:</label>
+          <input class="form-control" type="text" [(ngModel)]="fiche.moteur.esn" [disabled]="true"/>
+        </div>
+      </div>
+      <div>
+        <div class="form-group">
+          <label class="control-label"> Date d'entrée:</label>
+          <input class="form-control" type="date" [(ngModel)]="fiche.dateSiot"/>
+        </div>
+      </div>
+      <div>
+        <div class="form-group">
+          <label class="control-label"> Work Scope:</label>
+          <input class="form-control" type="text" [(ngModel)]="fiche.ws" />
+        </div>
+      </div>
+      <div>
+        <div class="form-group">
+          <label class="control-label"> TSN:</label>
+          <input class="form-control" type="text" [(ngModel)]="fiche.tsn" />
+        </div>
+      </div>
+      <div>
+        <div class="form-group">
+          <label class="control-label"> CSN:</label>
+          <input class="form-control" type="text" [(ngModel)]="fiche.csn"/>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary" (click)="updateFiche()">Save</button>
+
+  </div>
+</div>
+

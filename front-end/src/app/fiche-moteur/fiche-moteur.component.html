@@ -1,0 +1,76 @@
+
+<div class="container spacer" *ngIf="posteUser=='ingenieur'">
+  <div class="disconnect">
+    <label>USER:{{login}}</label>
+    <button  (click)="disconect()" class="btn">déconnexion</button>
+  </div>
+  <button routerLink="/dashboard" class="btn btn-primary" >Accueil</button>
+  <button routerLink="/fiches" class="btn btn-primary" >Gestion Fiches Moteurs</button>
+  <button routerLink="/propositions" class="btn btn-primary">Gestion Propositions</button>
+
+</div>
+
+<div class="container spacer">
+  <div class="panel panel-primary">
+    <div class="panel panel-heading"> Gestion des Fiches des Moteurs</div>
+    <div class="panel-body">
+      <div class="form-group">
+        <label>Recherche:</label>
+        <input type="text" [(ngModel)]="motCle"/>
+        <button class="btn btn-primary">Chercher</button>
+        <div class="excel">
+          <img src="./assets/Excell.png" (click)="export()"/>
+          <img src="./assets/icon.png" />
+        </div>
+      </div>
+      <div>
+
+        <table class="table table-striped">
+          <form #f="ngForm" (ngSubmit)="onAddFiche(f.value)">
+
+            <tr>
+              <td><input class="form-control" type="text" ngModel name="numFiche" placeholder="numFiche" required/></td>
+              <td> <select name="moteur" [(ngModel)]="selected">
+                <option *ngFor="let p of moteurs" [ngValue]="p" > Moteur:{{p.esn}} </option>
+              </select></td>
+              <td><input class="form-control" type="date" ngModel name="dateSiot" placeholder="dateSiot" required/></td>
+              <td><input class="form-control" type="text" ngModel name="ws" placeholder="work Scope" required/></td>
+              <td><input class="form-control" type="text" ngModel name="tsn" placeholder="tsn" required/></td>
+              <td><input class="form-control" type="text" ngModel name="csn" placeholder="csn" required/></td>
+              <td><button  type="submit" class="btn btn-primary">Ajouter</button></td>
+            </tr>
+          </form>
+        </table>
+      </div>
+
+      <table class="table table-striped" border="1">
+        <tr>
+          <th>Num de Fiche</th><th>User</th><th>Moteur</th> <th>Date d'entrée</th><th>Work Scope</th><th>TSN</th><th>CSN</th><th></th><th></th>
+        </tr>
+        <tr *ngFor="let c of pageFiches?.content">
+          <td>{{c.numFiche}}</td>
+          <td>{{c.utilisateur.login}}</td>
+          <td>{{c.moteur.esn}} </td>
+          <td>{{c.dateSiot | date:'yyyy-MM-dd'}}</td>
+          <td>{{c.ws}}</td>
+          <td>{{c.tsn}}</td>
+          <td>{{c.csn}}</td>
+          <td>
+            <a (click)="onEditFiche(c.numFiche)"  class="clickable btn btn-info"> Edit </a>
+          </td>
+          <td>
+            <a  (click)="onDeleteFiche(c)" class="clickable btn btn-danger"> Delete </a>
+          </td>
+        </tr>
+      </table>
+
+      <div class="container">
+        <ul class="nav nav-pills">
+          <li [ngClass]="{'active':i==currentPage}" *ngFor="let p of pages ; let i =index"><a class="clickable" (click)="gotoPage(i)">{{i}}</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+

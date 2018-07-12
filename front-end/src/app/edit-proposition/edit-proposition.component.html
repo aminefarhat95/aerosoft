@@ -1,0 +1,52 @@
+<div class="container spacer" *ngIf="posteUser=='chargerAffaire'">
+  <div class="disconnect">
+    <label>USER:{{login}}</label>
+    <button  (click)="disconect()" class="btn">déconnexion</button>
+  </div>
+  <button routerLink="/dashboard" class="btn btn-primary" >Accueil</button>
+  <button routerLink="/traiterProposition" class="btn btn-primary" >Traiter Propositions</button>
+</div>
+<div class="container spacer">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Traiter Proposition</div>
+    <div class="panel-body">
+      <form>
+      <div>
+        <div class="form-group">
+          <label class="control-label"> IdRapport:</label>
+          <input name="id_Rapport" class="form-control" type="number"  [(ngModel)]="rapport.id_Rapport" [disabled]="true"/>
+        </div>
+      </div>
+
+      <div>
+        <div class="form-group">
+          <label class="control-label"> SM/MM:</label>
+          <input name="smmm" class="form-control" type="text" [(ngModel)]="rapport.smmm.id" [disabled]="true"/>
+        </div>
+      </div>
+      <div>
+        <div class="form-group">
+          <label class="control-label"> Proposition:</label>
+          <input name="id_proposition" class="form-control" type="text" [(ngModel)]="rapport.proposition.id_proposition" [disabled]="true"/>
+        </div>
+      </div>
+      <div>
+        <div class="form-group">
+          <label class="control-label"> Statut:</label>
+          <input name="statut" value="Approuver" type="radio" [(ngModel)]="rapport.proposition.statut"/>Approuver
+          <input name="statut" value="Désapprouver" type="radio" [(ngModel)]="rapport.proposition.statut"/>Désapprouver
+        </div>
+      </div>
+      <div>
+        <div class="form-group">
+          <label class="control-label"> Remarques:</label>
+          <input name="remarques" class="form-control" type="text" [(ngModel)]="rapport.proposition.remarques"/>
+        </div>
+      </div>
+    <button class="btn btn-primary" (click)="updateProposition()">Save</button>
+      </form>
+  </div>
+</div>
+
+</div>
+

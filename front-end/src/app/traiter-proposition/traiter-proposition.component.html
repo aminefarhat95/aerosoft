@@ -1,0 +1,54 @@
+<div class="container spacer" *ngIf="posteUser=='chargerAffaire'">
+  <div class="disconnect">
+    <label>USER:{{login}}</label>
+    <button  (click)="disconect()" class="btn">déconnexion</button>
+  </div>
+  <button routerLink="/dashboard" class="btn btn-primary" >Accueil</button>
+  <button routerLink="/traiterProposition" class="btn btn-primary" >Traiter Propositions</button>
+
+</div>
+
+<div class="container spacer">
+  <div class="panel panel-primary">
+    <div class="panel panel-heading"> Liste des Propositions</div>
+    <div class="panel-body">
+      <div class="form-group">
+        <label>Recherche:</label>
+        <input type="text" [(ngModel)]="motCle"/>
+        <button class="btn btn-primary">Chercher</button>
+        <div class="excel">
+          <img src="./assets/Excell.png" />
+          <img src="./assets/icon.png" />
+        </div>
+      </div>
+
+      <table class="table table-striped" border="1">
+        <tr>
+          <th>IdProposition</th><th>ProposedTasks</th><th>Rapport</th> <th>Statut</th><th>Cout</th><th>Date_Proposition</th><th>Date_Approbation</th><th>Date_Init_Csc</th><th>Date_Resp_Csc</th><th>Remarques</th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let c of pageRapport?.content">
+          <td>{{c.proposition.id_proposition}}</td>
+          <td>{{c.proposition.proposition_tasks}}</td>
+          <td>{{c.id_Rapport}} </td>
+          <td>{{c.proposition.statut}}</td>
+          <td>{{c.proposition.cout_proposition}}</td>
+          <td>{{c.proposition.date_proposition}}</td>
+          <td>{{c.proposition.date_approbation}}</td>
+          <td>{{c.proposition.csc_init_date}}</td>
+          <td>{{c.proposition.csc_resp_date}}</td>
+          <td>{{c.proposition.remarques}}</td>
+          <td>
+            <a  *ngIf="c.proposition.statut==mode" (click)="onAddProposition(c.id_Rapport)"  class="clickable btn btn-info">traiter</a>
+          </td>
+        </tr>
+      </table>
+
+      <div class="container">
+        <ul class="nav nav-pills">
+          <li [ngClass]="{'active':i==currentPage}" *ngFor="let p of pages ; let i =index"><a class="clickable" (click)="gotoPage(i)">{{i}}</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
